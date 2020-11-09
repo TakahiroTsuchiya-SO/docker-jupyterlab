@@ -1,0 +1,24 @@
+version: '3'
+services:
+  jupyterlab:
+    build: ./
+    user: root
+    volumes:
+      - jupyterlab-dir:/home/JupyterLab/codes
+    ports:
+      - "8888:8888"
+    environment:
+      TZ: Asia/Tokyo
+    command:
+      jupyter lab
+          --ip=0.0.0.0
+          --allow-root
+          --no-browser
+          --NotebookApp.notebook_dir='/home/JupyterLab/codes'
+          --NotebookApp.token=''
+volumes:
+  jupyterlab-dir:
+    driver_opts:
+      type: none
+      device: /Users/takahiro.tsuchiya/JupyterLab/codes
+      o: bind
